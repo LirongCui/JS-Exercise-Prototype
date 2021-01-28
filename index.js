@@ -93,10 +93,29 @@ Car.prototype.fill = function(gallons){
   this.tank = this.tank + gallons;
 }
 
+Car.prototype.drive = function(distance){
+
+  let left = this.tank - (distance/this.milesPerGallon);
+  if (left > 0){
+    this.tank = left;
+    this.odometer = this.odometer + distance;
+  }
+  else{
+    const runOut = this.milesPerGallon*this.tank+this.odometer;
+    this.odometer = runOut;
+    this.tank = 0;
+
+    console.log(`I ran out of fuel at ${runOut} miles!`);
+  }
+}
+
 const carOne = new Car('Rav4', 25);
 
 carOne.fill(10);
 console.log(carOne.tank);
+carOne.drive(260);
+console.log(carOne.tank);
+console.log(carOne.odometer);
   
   
   /*
@@ -124,10 +143,10 @@ babyOne.play();
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Window/Global Object Binding;
+    2. Implicit Binding; 
+    3. New binding;
+    4. Explicit binding;
   */
   
   
